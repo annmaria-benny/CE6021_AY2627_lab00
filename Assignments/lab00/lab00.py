@@ -53,9 +53,7 @@ class SimpleImageProcessing:
             ndarray: Blurred image, same shape and dtype as input.
         """
         ksize = kwargs.get("ksize", 15)
-
         blurred = cv2.GaussianBlur(image, (ksize, ksize), 0)
-    
         return blurred.astype(np.uint8)
 
     def add_sharpen(self, image, **kwargs):
@@ -73,19 +71,19 @@ class SimpleImageProcessing:
         Returns:
             ndarray: Sharpened image, same shape and dtype as input.
         """
-         ksize = kwargs.get("ksize", 15)
-    strength = kwargs.get("strength", 1.5)
+        ksize = kwargs.get("ksize", 15)
+        strength = kwargs.get("strength", 1.5)
 
-    blurred = cv2.GaussianBlur(image, (ksize, ksize), 0)
+        blurred = cv2.GaussianBlur(image, (ksize, ksize), 0)
 
-    sharpened = cv2.addWeighted(
-        image,
-        1 + strength,
-        blurred,
-        -strength,
-        0
-    )
+        sharpened = cv2.addWeighted(
+            image,
+            1 + strength,
+            blurred,
+            -strength,
+            0
+        )
 
-    sharpened = np.clip(sharpened, 0, 255)
+        sharpened = np.clip(sharpened, 0, 255)
 
-    return sharpened.astype(np.uint8)
+        return sharpened.astype(np.uint8)
